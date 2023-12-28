@@ -5,7 +5,7 @@ import axios from 'axios'
 const Input: React.FC = () => {
     const context = useContext(GHStateContext);
 
-    const { userName, setUserName, tableData, setTableData, setLoading} = context;
+    const { userName, setUserName, setTableData, setLoading, error, setError} = context;
   
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setUserName(event.target.value);
@@ -19,16 +19,13 @@ const Input: React.FC = () => {
       axios.get(`${backendUrl}/api/getRepos/${userName}`)
         .then(response => {
           setLoading(false)
-           console.log('res',response)
-           setTableData(response.data)
+          setTableData(response.data)
+          setError("")
         })
         .catch(error => {
           setLoading(false)
           setTableData([])
-          if(error.response.data.status == 404){
-            console.log('User not found.')
-          }
-          console.log('error',error)
+          setError(error.response.data.msg)
         });
     }
   

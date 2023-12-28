@@ -7,6 +7,8 @@ interface GHContextType {
   setTableData: (arg: any[]) => void;
   loading: boolean;
   setLoading: (arg: boolean) => void;
+  error: string;
+  setError: (arg:string) => void;
 }
 
 const defaultState = {
@@ -15,7 +17,9 @@ const defaultState = {
     tableData : [],
     setTableData : (arg:Object) => {},
     loading: false,
-    setLoading: (arg: boolean) => {}
+    setLoading: (arg: boolean) => {},
+    error: '',
+    setError: (arg: String) => {}
 } as GHContextType
 
 export const GHStateContext = createContext(defaultState)
@@ -28,8 +32,9 @@ export default function GHStateProvider({ children } : GHProvidableProps){
   const [userName, setUserName] = useState<string>("");
   const [tableData, setTableData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>("")
 
-  return <GHStateContext.Provider value={{ userName, setUserName, tableData, setTableData, loading, setLoading }}>{children}</GHStateContext.Provider>;
+  return <GHStateContext.Provider value={{ userName, setUserName, tableData, setTableData, loading, setLoading, error, setError }}>{children}</GHStateContext.Provider>;
 };
 
 

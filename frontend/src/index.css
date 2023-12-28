@@ -28,3 +28,9 @@ input[type="text"] {
   width: 20%;
   padding: 5px;
 }
+
+.errorDiv{
+  display: flex;
+  justify-content: center;
+  border: 3px solid #c09999;
+}

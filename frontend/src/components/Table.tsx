@@ -9,7 +9,7 @@ const Table: React.FC = () => {
   
     const context = useContext(GHStateContext);
 
-    const { tableData,loading} = context;
+    const { tableData,loading,error} = context;
 
     const columnDefs = [
       { headerName: 'ID', field: 'id' },
@@ -26,7 +26,7 @@ const Table: React.FC = () => {
   
     return (
       <div className="ag-theme-alpine" style={{ height: 400, width: 800, margin:"2% auto" }}>
-        {loading ? "LOADING..." : (
+        {loading ? "LOADING..." : (error ? (<div className='errorDiv'> {error} </div>) : (
           <AgGridReact
           columnDefs={columnDefs}
           rowData={tableData}
@@ -34,7 +34,7 @@ const Table: React.FC = () => {
           paginationPageSize={10}
           domLayout='autoHeight'
         />
-        )}
+        ))}
        
       </div>
     );
